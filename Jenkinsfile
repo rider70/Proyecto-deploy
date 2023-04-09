@@ -1,5 +1,5 @@
 pipeline {
-    agent {label 'nodo1'}
+    agent none
 
     stages{   
         stage('Clone Backend - DEV ') {
