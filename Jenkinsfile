@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-              sh "cd /home/ebian/vue/vue-project ; docker build -t 192.168.255.142:8082/vue-project:2.0 . ; docker push 192.168.255.142:8082/vue-project:2.0"
+              sh "cd /home/ebian/vue/vue-project ; docker build -t 192.168.255.142:8082/vue-project:2.1 . ; docker push 192.168.255.142:8082/vue-project:2.1"
              
             }
         }
