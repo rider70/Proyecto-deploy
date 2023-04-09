@@ -1,11 +1,81 @@
 pipeline {
-    agent {label "nodo1"}
-    stages {
-        stage('Build') {
+    agent {label 'nodo1'}
+
+    stages{   
+        stage('Clone Backend - DEV ') {
+            agent { label 'nodo1' }
             steps {
-              sh "cd /home/ebian/vue/vue-project ; docker build -t 192.168.255.142:8082/vue-project:2.1 . ; docker push 192.168.255.142:8082/vue-project:2.1"
-             
+                git branch: 'main', url: 'https://github.com/rider70/mod5-proy-django.git'
+                echo 'Cloned Backend..'
             }
         }
+        stage('Build Backend - DEV') {
+            agent { label 'nodo1' }
+            steps {
+                sh 'docker-compose up -d'
+                echo 'Build backend - DEV'
+            }
+        }
+        stage('Clone Frontend - DEV') {
+            agent { label 'nodo1' }
+            steps {
+                git branch: 'main', url: 'https://github.com/rider70/vue3-recuperatorio.git'
+                echo 'Cloned Frontend - DEV'
+            }
+        }
+        stage('Build Frontend - DEV') {
+            agent {label 'nodo1'}
+            steps {
+                sh 'docker-compose up -d dev'
+                echo 'Build frontend - DEV'
+            }
+        }
+		
+		
+		 stage('Clone Frontend - QA') {
+            agent { label 'nodo1' }
+            steps {
+                git branch: 'main', url: 'https://github.com/rider70/vue3-recuperatorio.git'
+                echo 'Cloned Frontend - QA'
+            }
+        }
+        stage("Run Test - QA"){
+            agent { label 'nodo1' }
+            steps {
+                sh 'docker-compose up -d test'
+                echo 'Build tests ..'
+            }
+        }
+		
+		
+        stage('Clone Backend - PROD') {
+            agent { label 'nodo1' }
+            steps {
+                git branch: 'main', url: 'https://github.com/rider70/mod5-proy-django.git'
+                echo 'Cloned Backend - PROD'
+            }
+        }
+        stage('Build Backend - PROD') {
+            agent { label 'nodo1' }
+            steps {
+                sh 'docker-compose up -d'
+                echo 'Build backend - PROD'
+            }
+        }
+        stage('Clone Frontend - PROD') {
+            agent { label 'nodo1' }
+            steps {
+                git branch: 'main', url: 'https://github.com/rider70/vue3-recuperatorio.git'
+                echo 'Cloned Frontend - PROD'
+            }
+        }
+        stage('Build FrontEnd - PROD') {
+            agent {label 'nodo1'}
+            steps {
+                sh 'docker-compose up -d vue-app'
+                echo 'Build FrontEnd - PROD'
+            }
+        }
+ 
     }
 }
