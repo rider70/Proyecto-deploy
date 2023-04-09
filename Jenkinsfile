@@ -5,7 +5,7 @@ pipeline {
         stage('Clone Backend - DEV ') {
             agent { label 'nodo1' }
             steps {
-                git branch: 'main', url: 'https://github.com/rider70/mod5-proy-django.git'
+                git branch: 'main', url: 'https://github.com/rider70/proy-python.git'
                 echo 'Cloned Backend..'
             }
         }
@@ -51,7 +51,7 @@ pipeline {
         stage('Clone Backend - PROD') {
             agent { label 'nodo1' }
             steps {
-                git branch: 'main', url: 'https://github.com/rider70/mod5-proy-django.git'
+                git branch: 'main', url: 'https://github.com/rider70/proy-python.git'
                 echo 'Cloned Backend - PROD'
             }
         }
