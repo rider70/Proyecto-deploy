@@ -3,7 +3,8 @@ pipeline{
     stages{
         stage("Build"){
             steps{
-               sh "docker ps"
+               sh '''cd /home/ebian/vue/vue3-recuperatorio
+                     docker-compose up -d'''
             }
         }
     }
